@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "enquiries")
 @NoArgsConstructor
 public class EnqEntity {
-  
   @Id
   private String enqNumber;
   private String clientContact;
@@ -23,5 +22,4 @@ public class EnqEntity {
   private String remarks;
   private String modifiedDate;
   private String pseudoCode;
-
 }

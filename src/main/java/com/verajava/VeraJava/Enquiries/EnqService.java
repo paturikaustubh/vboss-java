@@ -8,11 +8,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EnqService {
-  
   @Autowired
   private EnqRepo enqRepo;
 
-  public List<EnqEntity> getAllDetails(){
+  public List<EnqEntity> getAllDetails() {
     return enqRepo.findAll();
   }
 
@@ -20,4 +19,18 @@ public class EnqService {
     return enqRepo.findById(enqNumber);
   }
 
+  public String getEndDateByEnqNumber(String enqNumber) {
+    return enqRepo.findEndDateByEnqNumber(enqNumber);
+  }
+
+  public Boolean updateDetails(EnqEntity enqEntity, String enqNumber) {
+    EnqEntity updateEntity = enqRepo.findById(enqNumber).orElse(null);
+
+    if(updateEntity!=null) {
+      updateEntity.setStage(enqEntity.getStage());
+      enqRepo.save(updateEntity);
+      return true;
+    }
+    return false;
+  }
 }

@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,14 +18,25 @@ public class EnqController {
   @Autowired
   private EnqService enqService;
 
+    @PutMapping(path = "/{enqNumber}")
+    public Boolean updateDetails (@RequestBody EnqEntity enqEntity, @PathVariable String enqNumber) {
+      Boolean done = enqService.updateDetails(enqEntity, enqNumber);
+      System.out.println(done);
+      return true;
+    }
+
   @GetMapping
-  public List<EnqEntity> getAllDetails(){
+  public List<EnqEntity> getAllDetails() {
     return enqService.getAllDetails();
   }
 
-  @GetMapping("/{enqNumber}")
+  @GetMapping(path = "/{enqNumber}", headers = "enquiry")
   public Optional <EnqEntity> getDetailsByEnqNumber(@PathVariable String enqNumber) {
     return enqService.getDetailsByEnqNumber(enqNumber);
   }
-  
+
+  @GetMapping(path = "/{enqNumber}", headers = "enddate")
+  public String getEndDateByEnqNumber(@PathVariable String enqNumber) {
+    return enqService.getEndDateByEnqNumber(enqNumber);
+  }  
 }
