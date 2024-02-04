@@ -19,8 +19,13 @@ public class EnqService {
     return enqRepo.findById(enqNumber);
   }
 
-  public String getEndDateByEnqNumber(String enqNumber) {
-    return enqRepo.findEndDateByEnqNumber(enqNumber);
+  public Object[] getAllEnqs() {
+    Object[] result = enqRepo.getAllEnqs().toArray();
+    return result;
+  }
+
+  public EnqEntity getSpecificEnq(String where) {
+    return enqRepo.getSpecificEnq(where);
   }
 
   public Boolean updateDetails(EnqEntity enqEntity, String enqNumber) {

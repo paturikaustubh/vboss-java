@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/enquiry")
+@CrossOrigin
 public class EnqController {
   
   @Autowired
@@ -35,8 +37,13 @@ public class EnqController {
     return enqService.getDetailsByEnqNumber(enqNumber);
   }
 
+  @GetMapping
+  public Object[] getAllEnqs() {
+    return enqService.getAllEnqs();
+  }  
+
   @GetMapping(path = "/{enqNumber}", headers = "enddate")
-  public String getEndDateByEnqNumber(@PathVariable String enqNumber) {
-    return enqService.getEndDateByEnqNumber(enqNumber);
+  public EnqEntity getSpecificEnq(@PathVariable String enqNumber) {
+    return enqService.getSpecificEnq(enqNumber);
   }  
 }

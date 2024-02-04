@@ -14,4 +14,10 @@ public class LoginService {
   public List<LoginEntity> getAllData() {
     return loginRepo.findAll();
   }
+
+  public Object[] getLoginPermission(String username, String password) {
+    Object[] result = loginRepo.getDetailsByUsernameAndPassword(username, password);
+    System.out.println(result);
+    return result;
+  }
 }
